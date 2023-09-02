@@ -1,0 +1,131 @@
+#ourtable3_wrapper{
+    width:98%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.myTable{
+    font-size: 12px;
+    min-width: 400px;
+    overflow: hidden;
+    border-radius: 7px 7px 0 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+}
+
+.myTable th {
+    background-color: #2D323E;
+    color: white;
+    font-weight: bold;
+  }
+
+.myTable td, .myTable th {
+    border: 0.01em solid #e3e2e2;
+  }
+  
+.myTable tr:nth-child(even){background-color: #f9f8f8;}
+
+/* Formats the text*/ 
+#ourtable3_filter,
+#ourtable3_length,
+#ourtable3_info,
+#ourtable3_paginate{
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Formats the input fields*/ 
+#ourtable3_filter input,
+#ourtable3_length select{
+    border: 1px solid rgb(3, 154, 204);
+}
+
+.pageholder,
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.titleholder,
+.linkholder{
+    display: flex;
+    margin-top: 10px;
+    width: 98%;
+    border-radius: 5px;
+}
+.ourbutton{
+    margin-right: 10px;
+    height: 30px;
+    width: 100px;
+    margin-left: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    
+    background-color: rgb(0, 0, 80);
+    color: white
+}
+
+.ourbutton:hover{
+    margin-right: 10px;
+    background-color: rgb(142, 142, 142);
+    color: white
+}
+
+.form1{
+    width: 30%;
+}
+
+form{
+    width:100%;
+}
+
+.titleholder{
+    display: 'flex';
+    justify-content:'space-between';
+    background-color: #4267B2;
+    align-items: center;
+    height: 40px;
+}
+
+.linkholder{
+    box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+    flex-direction: column;
+   
+}
+
+
+.title{
+    color: white;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title2{
+    color: #333;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.linkbox{
+    display: flex;
+    width:20%;
+    height: 50px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+
+
+}

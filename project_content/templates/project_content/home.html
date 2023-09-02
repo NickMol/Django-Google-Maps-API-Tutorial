@@ -1,0 +1,50 @@
+{% extends 'project_content/base.html' %}
+
+{% block content %}
+
+<div class="pageholder">
+    <div class="titleholder"> 
+        
+        <div class="title"> Google Maps API Data </div> 
+        
+    </div>
+
+
+    <div class="linkholder">
+        {% if mydata.count == 0 %}
+            <div> No data available </div>
+        {% else %}
+            <table id="ourtable3" class="myTable m-3">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Adress</th>
+                        <th>Zipcode</th>
+                        <th>City</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for a in mydata %}
+                    <tr>
+                        <td> {{a.id}} </td>
+                        <td> {{a.name}} </td>
+                        <td> {{a.adress}} </td>
+                        <td> {{a.zipcode}} </td>
+                        <td> {{a.city}} </td>
+                        <td> {{a.country}} </td>
+                    </tr>
+
+                    {% endfor%}
+                </tbody>
+
+                
+            </table>
+        {% endif %}
+     </div>
+
+</div>
+
+{% endblock %}
