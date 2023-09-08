@@ -5,15 +5,13 @@
 <div class="pageholder">
     <div class="titleholder"> 
         
-        <div class="title"> Google Maps API Data </div> 
+        <div class="title"> Geocoding for {{location.name}}</div> 
         
     </div>
 
 
     <div class="linkholder">
-        {% if mydata.count == 0 %}
-            <div> No data available </div>
-        {% else %}
+       
             <table id="ourtable3" class="myTable m-3">
                 <thead>
                     <tr>
@@ -23,29 +21,32 @@
                         <th>Zipcode</th>
                         <th>City</th>
                         <th>Country</th>
-                        <th>Link to geocoding</th>
+                        <th>Lat</th>
+                        <th>Lon</th>
+                        <th>Place Id</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {% for a in mydata %}
                     <tr>
-                        <td> {{a.id}} </td>
-                        <td> {{a.name}} </td>
-                        <td> {{a.adress}} </td>
-                        <td> {{a.zipcode}} </td>
-                        <td> {{a.city}} </td>
-                        <td> {{a.country}} </td>
-                        <td> <a href="{%url 'my_geocoding_view' a.id%}">Geocode!</a> </td>
+                        <td> {{location.id}} </td>
+                        <td> {{location.name}} </td>
+                        <td> {{location.adress}} </td>
+                        <td> {{location.zipcode}} </td>
+                        <td> {{location.city}} </td>
+                        <td> {{location.country}} </td>
+                        <td> {{latitude}} </td>
+                        <td> {{longitude}} </td>
+                        <td> {{place_id}} </td>
                     </tr>
-
-                    {% endfor%}
                 </tbody>
 
                 
             </table>
-        {% endif %}
+
      </div>
+
+       
 
 </div>
 
