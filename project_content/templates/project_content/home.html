@@ -23,7 +23,8 @@
                         <th>Zipcode</th>
                         <th>City</th>
                         <th>Country</th>
-                        <th>Link to geocoding</th>
+                        <th>Geocode link</th>
+                       
                     </tr>
                 </thead>
 
@@ -36,7 +37,8 @@
                         <td> {{a.zipcode}} </td>
                         <td> {{a.city}} </td>
                         <td> {{a.country}} </td>
-                        <td> <a href="{%url 'my_geocoding_view' a.id%}">Geocode!</a> </td>
+                        <td> <a href="{% url 'my_geocoding_view' a.id %}"> Geocode!</a> </td>
+                       
                     </tr>
 
                     {% endfor%}

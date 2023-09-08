@@ -1,10 +1,9 @@
-from django.views.generic import ListView,FormView
+from django.views.generic import ListView
 from django.views import View
 from django.shortcuts import render
 from .models import *
 import googlemaps
 from django.conf import settings
-import json
 
 class HomeView(ListView):
     template_name = "project_content/home.html"
@@ -17,29 +16,45 @@ class HomeView(ListView):
 class GeocodingView(View):
     template_name = "project_content/geocoding.html"
 
-    def get(self, request, pk):
+    def get(self,request,pk): 
         location = Locations.objects.get(pk=pk)
-        # Perform calculations or any other logic here
 
-        # check whether we have the data in the database that we need to calculate the geocode
-        if location.adress and location.country and location.zipcode and location.city != None: 
-            # creating string of existing location data in database
-            adress_string = str(location.adress)+", "+str(location.zipcode)+", "+str(location.city) +", "+str(location.country)
-            print(adress_string)
-            gmaps = googlemaps.Client(key= settings.GOOGLE_API_KEY)
-            intermediate = json.dumps(gmaps.geocode(str(adress_string))) 
-            intermediate2 = json.loads(intermediate)
-            latitude = intermediate2[0]['geometry']['location']['lat']
-            longitude = intermediate2[0]['geometry']['location']['lng']
-            place_id = intermediate2[0]['place_id']
-            #print(latitude)
-            #print(longitude)
+        if location.lng and location.lat and location.place_id != None: 
+            lat = location.lat
+            lng = location.lng
+            place_id = location.place_id
+            label = "from my database"
+
+        elif location.adress and location.country and location.zipcode and location.city != None: 
+            adress_string = str(location.adress)+", "+str(location.zipcode)+", "+str(location.city)+", "+str(location.country)
+
+            gmaps = googlemaps.Client(key = settings.GOOGLE_API_KEY)
+            result = gmaps.geocode(adress_string)[0]
+            
+            lat = result.get('geometry', {}).get('location', {}).get('lat', None)
+            lng = result.get('geometry', {}).get('location', {}).get('lng', None)
+            place_id = result.get('place_id', {})
+            label = "from my api call"
+
+            location.lat = lat
+            location.lng = lng
+            location.place_id = place_id
+            location.save()
+
+        else: 
+            result = ""
+            lat = ""
+            lng = ""
+            place_id = ""
+            label = "no call made"
 
         context = {
-            'location': location,
-            'latitude': latitude, 
-            'longitude': longitude, 
-            'place_id':place_id,
-            'geocoded_data': intermediate2,
+            'location':location,
+            'lat':lat, 
+            'lng':lng, 
+            'place_id':place_id, 
+            'label': label
         }
+        
         return render(request, self.template_name, context)
+

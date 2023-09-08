@@ -5,13 +5,12 @@
 <div class="pageholder">
     <div class="titleholder"> 
         
-        <div class="title"> Geocoding for {{location.name}}</div> 
+        <div class="title"> Geocoding template for {{location.name}} ({{label}})</div> 
         
     </div>
 
 
     <div class="linkholder">
-       
             <table id="ourtable3" class="myTable m-3">
                 <thead>
                     <tr>
@@ -22,8 +21,9 @@
                         <th>City</th>
                         <th>Country</th>
                         <th>Lat</th>
-                        <th>Lon</th>
-                        <th>Place Id</th>
+                        <th>Lng</th>
+                        <th>Place id</th>
+                       
                     </tr>
                 </thead>
 
@@ -35,18 +35,20 @@
                         <td> {{location.zipcode}} </td>
                         <td> {{location.city}} </td>
                         <td> {{location.country}} </td>
-                        <td> {{latitude}} </td>
-                        <td> {{longitude}} </td>
+
+                        <td> {{lat}} </td>
+                        <td> {{lng}} </td>
                         <td> {{place_id}} </td>
+                       
                     </tr>
+
                 </tbody>
 
                 
             </table>
-
      </div>
 
-       
+    
 
 </div>
 
