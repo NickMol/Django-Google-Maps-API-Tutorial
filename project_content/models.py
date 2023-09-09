@@ -16,12 +16,11 @@ class Locations(models.Model):
 
     def __str__(self):
         return self.name
-    
 
-class Distances(models.Model):
-    from_location = models.ForeignKey(Locations, related_name = "from_location", on_delete=models.CASCADE)
-    to_location = models.ForeignKey(Locations, related_name = "to_location", on_delete=models.CASCADE)
-    mode = models.CharField(max_length=200,blank=True, null=True)
+class Distances (models.Model): 
+    from_location = models.ForeignKey(Locations, related_name = 'from_location', on_delete=models.CASCADE)
+    to_location = models.ForeignKey(Locations, related_name = 'to_location', on_delete=models.CASCADE)
+    mode = models.CharField(max_length=200, blank=True, null=True)
     distance_km = models.DecimalField(max_digits=10, decimal_places=2)
     duration_mins = models.DecimalField(max_digits=10, decimal_places=2)
     duration_traffic_mins = models.DecimalField(max_digits=10, decimal_places=2,blank=True, null=True)

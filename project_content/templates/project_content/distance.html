@@ -5,7 +5,7 @@
 <div class="pageholder">
     <div class="titleholder"> 
         
-        <div class="title"> Google Maps API Calculate Distances </div> 
+        <div class="title"> Google Maps Distance API </div> 
         
     </div>
 
@@ -20,8 +20,8 @@
                         <th>Id</th>
                         <th>From location</th>
                         <th>To location</th>
-                        <th>mode</th>
-                        <th>Distance in KM</th>
+                        <th>Mode</th>
+                        <th>Distance in km</th>
                         <th>Duration in mins</th>
                         <th>Duration traffic in mins</th>
                        
@@ -32,8 +32,8 @@
                     {% for a in distances %}
                     <tr>
                         <td> {{a.id}} </td>
-                        <td> {{a.from_location.name}} </td>
-                        <td> {{a.to_location.name}} </td>
+                        <td> {{a.from_location}} </td>
+                        <td> {{a.to_location}} </td>
                         <td> {{a.mode}} </td>
                         <td> {{a.distance_km}} </td>
                         <td> {{a.duration_mins}} </td>
@@ -49,16 +49,20 @@
         {% endif %}
      </div>
 
-
      <form method="post">
         {% csrf_token %}
-            <div class="linkholder">
-                <div class="form1 ml-3"> {{form.from_location|as_crispy_field}}  </div>
-                <div class="form1 ml-3"> {{form.to_location|as_crispy_field}}  </div>
-                <div class="form1 ml-3"> {{form.mode|as_crispy_field}}  </div>
-                <button class="ourbutton"type="submit"> Submit</button>
-            </div>
+        <div class="linkholder"> 
+            
+            <div class="form1 ml-3"> {{form.from_location|as_crispy_field}} </div>
+            <div class="form1 ml-3"> {{form.to_location|as_crispy_field}} </div>
+            <div class="form1 ml-3"> {{form.mode|as_crispy_field}} </div>
+
+            <button class="ourbutton" type="submit"> Submit </button>
+
+
+        </div>
     </form>
+
 </div>
 
 {% endblock %}
