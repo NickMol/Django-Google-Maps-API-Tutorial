@@ -4,23 +4,40 @@
 <script> 
     let map;
     function initMap() {
+    
+    var locations = {{ locations|safe }};
+    var firstLocation = locations[0]
+    var infoWindows = [];
+
     map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
+        center: { lat: firstLocation.lat, lng: firstLocation.lng },
+        zoom: 4,
     });
 
-
-    // Loop through the locations and add markers
-    var locations = {{ locations|safe }};
-    console.log(locations)
-    for (var i = 0; i < locations.length; i++) {
-        var location = locations[i];
+    locations.forEach(function (location) {
         var marker = new google.maps.Marker({
             position: { lat: location.lat, lng: location.lng },
             map: map,
-            title: location.title
+            title: location.name
         });
-    }
+
+        var infowindow = new google.maps.InfoWindow({
+            content: location.name
+        });
+
+        infoWindows.push(infowindow); // Add the info window to the array
+
+        marker.addListener('click', function () {
+            // Close all info windows before opening the clicked one
+            infoWindows.forEach(function (iw) {
+                iw.close();
+            });
+
+            infowindow.open(map, marker); // Open the clicked info window
+        });
+    });
+
+    
 
     
     }
