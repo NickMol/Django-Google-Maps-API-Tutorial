@@ -1,0 +1,57 @@
+{% extends 'project_content/base.html' %}
+{% block content %}
+
+<script> 
+    let map;
+    function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+    });
+
+
+    // Loop through the locations and add markers
+    var locations = {{ locations|safe }};
+    console.log(locations)
+    for (var i = 0; i < locations.length; i++) {
+        var location = locations[i];
+        var marker = new google.maps.Marker({
+            position: { lat: location.lat, lng: location.lng },
+            map: map,
+            title: location.title
+        });
+    }
+
+    
+    }
+    window.initMap = initMap;
+
+</script>
+
+
+<div class="pageholder">
+    <div class="titleholder"> 
+        
+        <div class="title"> Displaying a map </div> 
+        
+    </div>
+
+
+    <div class="linkholder">
+
+        <div class="mapholder"> 
+            <div id="map"></div>
+            <script
+            src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap&v=weekly"
+            defer
+            ></script>
+
+        </div>
+
+     </div>
+
+     <div class="linkholder">  <a href="{% url 'my_home_view' %}"> Home</a> </div>
+
+</div>
+
+{% endblock %}

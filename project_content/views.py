@@ -13,6 +13,29 @@ class HomeView(ListView):
     model = Locations
     success_url = "/"
 
+class MapView(View):
+    template_name = "project_content/map.html"
+    
+    def get(self,request):
+        key = settings.GOOGLE_API_KEY
+        eligable_locations = Locations.objects.filter(place_id__isnull=False)
+        locations = []
+
+        for a in eligable_locations :
+            data = {
+                "lat": float(a.lat),
+                "lng": float(a.lng),
+                "name": a.name,
+
+            }
+            locations.append(data)
+        
+        context = {
+            'key':key, 
+            'locations':locations
+        }
+
+        return render(request, self.template_name, context)
 
 class DistanceView(View):
     template_name = "project_content/distance.html"
