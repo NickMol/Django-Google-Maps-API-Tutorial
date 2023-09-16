@@ -1,74 +1,79 @@
 {% extends 'project_content/base.html' %}
 {% block content %}
 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
 <script> 
-    let map;
-    function initMap() {
-    
-    var locations = {{ locations|safe }};
-    var firstLocation = locations[0]
-    var infoWindows = [];
+    let map
 
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: firstLocation.lat, lng: firstLocation.lng },
-        zoom: 4,
-    });
+    function initMap(){
 
-    locations.forEach(function (location) {
-        var marker = new google.maps.Marker({
-            position: { lat: location.lat, lng: location.lng },
-            map: map,
-            title: location.name
-        });
+        var locations = {{ locations|safe}};
+        var firstLocation = locations[0]
+        var infoWindow = []
 
-        var infowindow = new google.maps.InfoWindow({
-            content: location.name
-        });
+        map = new google.maps.Map(document.getElementById("map"),{
+            center: { lat: firstLocation.lat, lng: firstLocation.lng }, 
+            zoom: 4,
+        }
+        );
 
-        infoWindows.push(infowindow); // Add the info window to the array
-
-        marker.addListener('click', function () {
-            // Close all info windows before opening the clicked one
-            infoWindows.forEach(function (iw) {
-                iw.close();
+        locations.forEach(function (location){
+            var marker = new google.maps.Marker({
+                position: {lat: location.lat, lng: location.lng}, 
+                map: map, 
+                title: location.name
             });
 
-            infowindow.open(map, marker); // Open the clicked info window
+            var infowindow = new google.maps.InfoWindow({
+                content: location.name, 
+            });
+
+            infoWindow.push(infowindow)
+
+            marker.addListener('click', function(){
+                infoWindow.forEach(function(iw){
+                    iw.close();
+                });
+
+                infowindow.open(map, marker)
+            });
         });
-    });
-
-    
-
-    
     }
-    window.initMap = initMap;
+
+    window.initMap = initMap
 
 </script>
-
 
 <div class="pageholder">
     <div class="titleholder"> 
         
-        <div class="title"> Displaying a map </div> 
+        <div class="title"> Google Maps API Displaying Markers on the Map </div> 
         
     </div>
 
 
     <div class="linkholder">
-
         <div class="mapholder"> 
-            <div id="map"></div>
-            <script
-            src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap&v=weekly"
-            defer
-            ></script>
+            <div id="map"> </div>
+
+            <script async
+                src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap">
+            </script>
 
         </div>
-
+        
      </div>
 
-     <div class="linkholder">  <a href="{% url 'my_home_view' %}"> Home</a> </div>
+
+    <div class="linkholder">  
+        <a href="{% url 'my_home_view' %}"> Go to our homepage</a> 
+
+    </div>
+
+
 
 </div>
+
 
 {% endblock %}
